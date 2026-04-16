@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { ArrowRight, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
+import { getClient } from '@/lib/supabase'
 
 const DEFAULT = {
   title: 'Sistemas que hacen crecer tu negocio',
@@ -9,9 +10,17 @@ const DEFAULT = {
   image_url: null,
 }
 
-export default function Hero({ data }) {
-  const hero = data || DEFAULT
+export default function Hero({ data: initialData }) {
+  const [hero, setHero]       = useState(initialData || DEFAULT)
   const [counters, setCounters] = useState({ p:0, i:0, c:0 })
+
+  // Always refetch fresh data client-side so admin changes show immediately
+  useEffect(() => {
+    const sb = getClient()
+    sb.from('hero').select('*').single().then(({ data }) => {
+      if (data) setHero(data)
+    })
+  }, [])
 
   useEffect(() => {
     const targets = [{ key:'p', val:50 }, { key:'i', val:4 }, { key:'c', val:100 }]
@@ -25,6 +34,8 @@ export default function Hero({ data }) {
       }, 35)
     })
   }, [])
+
+  const titleHasCrecer = hero.title?.toLowerCase().includes('crecer')
 
   return (
     <section className="relative pt-20 overflow-hidden bg-white">
@@ -41,8 +52,9 @@ export default function Hero({ data }) {
               Software 100% personalizado
             </div>
 
-            <h1 className="font-display font-bold text-slate-900 leading-tight mb-5" style={{fontSize:'clamp(30px,4.5vw,52px)'}}>
-              {hero.title.includes('crecer') ? (
+            <h1 className="font-display font-bold text-slate-900 leading-tight mb-5"
+              style={{fontSize:'clamp(30px,4.5vw,52px)'}}>
+              {titleHasCrecer ? (
                 <>Sistemas que hacen{' '}
                   <span className="relative inline-block text-blue-600">
                     crecer
@@ -53,20 +65,25 @@ export default function Hero({ data }) {
               ) : hero.title}
             </h1>
 
-            <p className="text-slate-500 text-base sm:text-lg leading-relaxed max-w-lg mb-8 animate-fade-up animate-delay-100 opacity-0" style={{animationFillMode:'forwards'}}>
+            <p className="text-slate-500 text-base sm:text-lg leading-relaxed max-w-lg mb-8 opacity-0 animate-fade-up animate-delay-100"
+              style={{animationFillMode:'forwards'}}>
               {hero.subtitle}
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3 mb-10 animate-fade-up animate-delay-200 opacity-0" style={{animationFillMode:'forwards'}}>
-              <a href="#contacto" className="group inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm transition-all shadow-lg shadow-blue-600/25 hover:shadow-blue-600/35 hover:-translate-y-0.5">
+            <div className="flex flex-col sm:flex-row gap-3 mb-10 opacity-0 animate-fade-up animate-delay-200"
+              style={{animationFillMode:'forwards'}}>
+              <a href="#contacto"
+                className="group inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm transition-all shadow-lg shadow-blue-600/25 hover:-translate-y-0.5">
                 Agenda una demo <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform"/>
               </a>
-              <a href="#servicios" className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl border border-slate-200 text-slate-600 font-medium text-sm hover:bg-slate-50 hover:text-slate-900 transition-all">
+              <a href="#servicios"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl border border-slate-200 text-slate-600 font-medium text-sm hover:bg-slate-50 hover:text-slate-900 transition-all">
                 Ver servicios <ChevronRight className="w-4 h-4"/>
               </a>
             </div>
 
-            <div className="flex flex-wrap gap-8 animate-fade-up animate-delay-300 opacity-0" style={{animationFillMode:'forwards'}}>
+            <div className="flex flex-wrap gap-8 opacity-0 animate-fade-up animate-delay-300"
+              style={{animationFillMode:'forwards'}}>
               {[{v:counters.p,pre:'+',suf:'',l:'Proyectos'},{v:counters.i,pre:'',suf:'+',l:'Industrias'},{v:counters.c,pre:'',suf:'%',l:'Código a medida'}].map(s => (
                 <div key={s.l}>
                   <div className="font-display font-bold text-slate-900 text-3xl">{s.pre}{s.v}{s.suf}</div>
@@ -77,26 +94,41 @@ export default function Hero({ data }) {
           </div>
 
           {/* RIGHT */}
-          <div className="relative hidden md:block animate-fade-up animate-delay-200 opacity-0" style={{animationFillMode:'forwards'}}>
-            {/* Floating cards */}
-            <div className="absolute -top-4 -right-2 z-20 bg-white rounded-xl border border-slate-200 shadow-lg px-3 py-2.5 flex items-center gap-2.5 animate-fade-in animate-delay-500 opacity-0" style={{animationFillMode:'forwards'}}>
+          <div className="relative hidden md:block opacity-0 animate-fade-up animate-delay-200"
+            style={{animationFillMode:'forwards'}}>
+            <div className="absolute -top-4 -right-2 z-20 bg-white rounded-xl border border-slate-200 shadow-lg px-3 py-2.5 flex items-center gap-2.5 opacity-0 animate-fade-in animate-delay-500"
+              style={{animationFillMode:'forwards'}}>
               <div className="w-8 h-8 rounded-lg bg-green-50 flex items-center justify-center text-base">✅</div>
-              <div><div className="text-green-600 font-semibold text-[10px]">Nuevo proyecto lanzado</div><div className="text-slate-400 text-[10px]">Sistema de inventario · Hoy</div></div>
+              <div>
+                <div className="text-green-600 font-semibold text-[10px]">Nuevo proyecto lanzado</div>
+                <div className="text-slate-400 text-[10px]">Sistema de inventario · Hoy</div>
+              </div>
             </div>
-            <div className="absolute -bottom-3 -left-4 z-20 bg-white rounded-xl border border-slate-200 shadow-lg px-3 py-2.5 flex items-center gap-2.5 animate-fade-in animate-delay-400 opacity-0" style={{animationFillMode:'forwards'}}>
+            <div className="absolute -bottom-3 -left-4 z-20 bg-white rounded-xl border border-slate-200 shadow-lg px-3 py-2.5 flex items-center gap-2.5 opacity-0 animate-fade-in animate-delay-400"
+              style={{animationFillMode:'forwards'}}>
               <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-base">🚀</div>
-              <div><div className="text-blue-600 font-semibold text-[10px]">Deploy exitoso</div><div className="text-slate-400 text-[10px]">Sistema médico v2.1</div></div>
+              <div>
+                <div className="text-blue-600 font-semibold text-[10px]">Deploy exitoso</div>
+                <div className="text-slate-400 text-[10px]">Sistema médico v2.1</div>
+              </div>
             </div>
 
             {hero.image_url ? (
               <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-xl">
-                <Image src={hero.image_url} alt="GWS Dashboard" width={600} height={400} className="w-full h-auto object-cover" />
+                <img src={hero.image_url} alt="GWS Dashboard" className="w-full h-auto object-cover"/>
               </div>
             ) : (
+              /* Default animated dashboard mockup */
               <div className="rounded-2xl border border-slate-200 bg-white shadow-xl overflow-hidden">
                 <div className="flex items-center gap-2 px-4 py-3 bg-slate-50 border-b border-slate-100">
-                  <div className="flex gap-1.5"><div className="w-2.5 h-2.5 rounded-full bg-red-400"/><div className="w-2.5 h-2.5 rounded-full bg-yellow-400"/><div className="w-2.5 h-2.5 rounded-full bg-green-400"/></div>
-                  <div className="flex-1 text-center bg-white border border-slate-200 rounded px-2 py-0.5 text-[10px] text-slate-400 font-mono">gws.app/dashboard</div>
+                  <div className="flex gap-1.5">
+                    <div className="w-2.5 h-2.5 rounded-full bg-red-400"/>
+                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-400"/>
+                    <div className="w-2.5 h-2.5 rounded-full bg-green-400"/>
+                  </div>
+                  <div className="flex-1 text-center bg-white border border-slate-200 rounded px-2 py-0.5 text-[10px] text-slate-400 font-mono">
+                    gws.app/dashboard
+                  </div>
                 </div>
                 <div className="p-4 grid grid-cols-[140px_1fr] gap-3 bg-slate-50/60">
                   <div className="bg-white rounded-xl p-3 border border-slate-100">
