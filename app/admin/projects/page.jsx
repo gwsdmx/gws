@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { Plus, Pencil, Trash2, Image, Video, X, Check } from 'lucide-react'
+import { Plus, Pencil, Trash2, Image, Video, X, Check, Briefcase } from 'lucide-react'
 import { getClient } from '@/lib/supabase'
 import { getStorageUrl } from '@/lib/utils'
 import Button from '@/components/ui/Button'
