@@ -80,7 +80,7 @@ export default function Contact() {
           <div className="p-5 rounded-2xl bg-white/4 border border-white/8 mb-7">
             <p className="font-display font-black text-white text-sm mb-3">¿Por qué elegirnos?</p>
             <div className="space-y-2.5">
-              {['Sin contratos a largo plazo','Presupuesto adaptable en etapas','El código fuente es 100% tuyo','Soporte técnico continuo'].map(b => (
+              {['Sin contratos a largo plazo','Presupuesto adaptable en etapas','Licencia perpetua del sistema','Soporte técnico continuo'].map(b => (
                 <div key={b} className="flex items-center gap-2.5">
                   <div className="w-5 h-5 rounded-full bg-green-500/15 border border-green-500/25 flex items-center justify-center shrink-0">
                     <Check className="w-3 h-3 text-green-400"/>
