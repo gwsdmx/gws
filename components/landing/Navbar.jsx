@@ -13,7 +13,7 @@ const LINKS = [
 ]
 
 export default function Navbar() {
-  const [open,     setOpen]     = useState(false)
+  const [open, setOpen]         = useState(false)
   const [scrolled, setScrolled] = useState(false)
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 12)
@@ -23,11 +23,11 @@ export default function Navbar() {
 
   return (
     <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur border-b border-slate-100 shadow-sm' : 'bg-white/90 backdrop-blur'}`}>
-      <div className="max-w-6xl mx-auto px-5 sm:px-8 py-3 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 flex items-center justify-between h-16">
 
-        {/* Logo */}
-        <Link href="/" className="flex items-center">
-          <div className="relative h-12 w-44">
+        {/* Logo — más grande */}
+        <Link href="/" className="flex items-center shrink-0">
+          <div className="relative" style={{width:'180px', height:'56px'}}>
             <Image
               src="/logo-light.png"
               alt="GWS Global Web Solutions"
@@ -48,7 +48,6 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* CTA */}
         <div className="hidden md:flex items-center gap-3">
           <a href="#contacto"
             className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white text-sm font-black transition-all shadow-lg shadow-violet-500/25 hover:-translate-y-0.5">
@@ -56,13 +55,11 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Mobile hamburger */}
         <button className="md:hidden text-slate-500 p-1" onClick={() => setOpen(!open)}>
           {open ? <X className="w-5 h-5"/> : <Menu className="w-5 h-5"/>}
         </button>
       </div>
 
-      {/* Mobile menu */}
       {open && (
         <div className="md:hidden bg-white border-t border-slate-100 px-5 py-4 flex flex-col gap-1 shadow-lg">
           {LINKS.map(l => (
