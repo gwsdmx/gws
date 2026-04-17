@@ -1,16 +1,17 @@
-const ITEMS = ['Retail & Comercio','Sistemas Médicos','Talleres Automotrices','Eventos & Check-in','Gobierno e Instituciones','E-Commerce','Control de Inventario','Plataformas a Medida']
+const ITEMS = ['Sistema POS','Control de Inventario','Sistema Médico','Check-in con QR','Tienda en Línea','App para Talleres','ERP Empresarial','Software a Medida']
 export default function Marquee() {
   const rep = [...ITEMS,...ITEMS,...ITEMS,...ITEMS]
   return (
-    <div className="overflow-hidden bg-gradient-to-r from-indigo-600 via-blue-600 to-cyan-500 py-3.5">
-      <div className="flex w-max" style={{animation:'marqueeScroll 25s linear infinite'}}>
+    <div className="overflow-hidden bg-[#0f0a1e] py-3.5 border-y border-white/5">
+      <div className="flex w-max" style={{animation:'mqscroll 25s linear infinite'}}>
         {rep.map((item,i)=>(
-          <div key={i} className="flex items-center gap-3 px-7 text-white/80 text-xs font-semibold whitespace-nowrap tracking-wide">
-            {item}<span className="text-white/30 text-sm">·</span>
+          <div key={i} className="flex items-center gap-3 px-7 text-white/40 text-xs font-bold whitespace-nowrap tracking-wide uppercase">
+            <span className="w-1 h-1 rounded-full bg-violet-500"/>
+            {item}
           </div>
         ))}
       </div>
-      <style>{`@keyframes marqueeScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}`}</style>
+      <style>{`@keyframes mqscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}`}</style>
     </div>
   )
 }
