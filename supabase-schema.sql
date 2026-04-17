@@ -76,6 +76,7 @@ create table if not exists public.leads (
   nombre     text not null,
   email      text not null,
   mensaje    text,
+  telefono   text,
   source     text default 'landing',
   created_at timestamptz default now()
 );
@@ -137,3 +138,21 @@ on conflict (key) do nothing;
 -- ¡Listo! Recuerda crear tu usuario en:
 -- Authentication → Users → Add user
 -- ══════════════════════════════════════════════════
+
+-- 7. Redes sociales (agregar al settings existente)
+-- Ejecutar si ya tienes la tabla settings creada:
+insert into public.settings (key, value) values
+  ('social_linkedin',  '') on conflict (key) do nothing;
+insert into public.settings (key, value) values
+  ('social_instagram', '') on conflict (key) do nothing;
+insert into public.settings (key, value) values
+  ('social_facebook',  '') on conflict (key) do nothing;
+insert into public.settings (key, value) values
+  ('social_twitter',   '') on conflict (key) do nothing;
+insert into public.settings (key, value) values
+  ('social_tiktok',    '') on conflict (key) do nothing;
+insert into public.settings (key, value) values
+  ('social_whatsapp',  '') on conflict (key) do nothing;
+
+-- Agregar campo telefono a leads si no existe
+alter table public.leads add column if not exists telefono text;
