@@ -2,10 +2,10 @@
 import { useEffect, useRef, useState } from 'react'
 
 const STATS = [
-  {v:50,pre:'+',suf:'',l:'Proyectos entregados'},
-  {v:4, pre:'',suf:'+',l:'Industrias atendidas'},
-  {v:100,pre:'',suf:'%',l:'Código a medida'},
-  {v:24,pre:'<',suf:'h',l:'Tiempo de respuesta'},
+  { v:50,  pre:'+', suf:'',  l:'Proyectos entregados', icon:'🚀' },
+  { v:4,   pre:'',  suf:'+', l:'Industrias atendidas',  icon:'🏢' },
+  { v:100, pre:'',  suf:'%', l:'Código a medida',       icon:'💎' },
+  { v:24,  pre:'<', suf:'h', l:'Tiempo de respuesta',   icon:'⚡' },
 ]
 
 export default function Stats() {
@@ -18,8 +18,7 @@ export default function Stats() {
       if (e.isIntersecting && !started) {
         setStarted(true)
         STATS.forEach((s, i) => {
-          let cur = 0
-          const step = s.v / 40
+          let cur = 0; const step = s.v / 40
           const t = setInterval(() => {
             cur = Math.min(cur + step, s.v)
             setVals(prev => { const next=[...prev]; next[i]=Math.round(cur); return next })
@@ -33,14 +32,15 @@ export default function Stats() {
   }, [started])
 
   return (
-    <section id="nosotros" ref={ref} className="bg-blue-600 py-14 sm:py-16">
-      <div className="max-w-5xl mx-auto px-5 sm:px-8 grid grid-cols-2 md:grid-cols-4 gap-5">
+    <section id="nosotros" ref={ref} className="py-16 sm:py-20 px-5 sm:px-8 bg-white border-y border-slate-100">
+      <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-5">
         {STATS.map((s, i) => (
-          <div key={s.l} className="text-center bg-white/10 border border-white/20 rounded-2xl py-7 px-4">
-            <div className="font-display font-bold text-white mb-2" style={{fontSize:'clamp(28px,4vw,44px)'}}>
+          <div key={s.l} className="text-center p-6 rounded-2xl bg-gradient-to-br from-slate-50 to-blue-50 border border-blue-100 hover:shadow-md transition-all">
+            <div className="text-3xl mb-2">{s.icon}</div>
+            <div className="font-display font-bold text-slate-900 mb-1" style={{fontSize:'clamp(28px,4vw,44px)'}}>
               {s.pre}{vals[i]}{s.suf}
             </div>
-            <div className="text-blue-200 text-xs sm:text-sm">{s.l}</div>
+            <div className="text-slate-500 text-xs sm:text-sm">{s.l}</div>
           </div>
         ))}
       </div>
