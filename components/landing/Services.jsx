@@ -51,12 +51,14 @@ export default function Services() {
         <div className="text-center mb-14">
           <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-violet-50 border border-violet-200 text-violet-700 text-xs font-black tracking-widest uppercase mb-4">¿Para quién es?</span>
           <h2 className="font-display font-black text-slate-900 mb-3 tracking-tight" style={{fontSize:'clamp(28px,4vw,44px)'}}>
-            Tenemos un sistema para tu tipo de negocio
+            Si tienes un negocio,<br/>
+            <span className="bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">tenemos el sistema para ti</span>
           </h2>
-          <p className="text-slate-500 text-base max-w-xl mx-auto leading-relaxed">
-            No importa si eres pequeño o grande, si tienes tienda física o en línea, si atiendes pacientes o asistentes. <strong className="text-slate-700">Hacemos el sistema exacto que necesitas.</strong>
+          <p className="text-slate-500 text-base max-w-2xl mx-auto leading-relaxed mt-4">
+            Estos son los sistemas más comunes que desarrollamos — pero <strong className="text-slate-700">no estamos limitados a estos.</strong> Si tu negocio necesita algo diferente, lo construimos desde cero. Cuéntanos tu caso y te decimos cómo lo resolvemos.
           </p>
         </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {SVCS.map((s,i)=>(
             <div key={s.title} className={`group rounded-2xl border-2 ${s.border} ${s.bg} p-6 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer animate-fade-up opacity-0`}
@@ -73,8 +75,14 @@ export default function Services() {
             </div>
           ))}
         </div>
-        <div className="mt-12 text-center">
-          <p className="text-slate-400 text-sm mb-4">¿Tu negocio no está en la lista? No importa — lo construimos igualmente.</p>
+
+        {/* CTA especial — "Si no ves tu industria..." */}
+        <div className="mt-10 rounded-2xl border-2 border-dashed border-violet-200 bg-gradient-to-br from-violet-50 to-indigo-50 p-8 text-center">
+          <div className="text-3xl mb-3">🛠️</div>
+          <h3 className="font-display font-black text-slate-900 text-lg mb-2">¿No ves tu industria aquí?</h3>
+          <p className="text-slate-500 text-sm max-w-lg mx-auto leading-relaxed mb-5">
+            No hay problema. Desarrollamos <strong className="text-slate-700">cualquier tipo de sistema</strong> — restaurantes, escuelas, inmobiliarias, salones de belleza, laboratorios y más. Si puedes imaginarlo, nosotros lo construimos.
+          </p>
           <a href="#contacto" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-black text-sm hover:-translate-y-0.5 transition-all shadow-lg shadow-violet-500/25">
             Cuéntanos tu caso →
           </a>

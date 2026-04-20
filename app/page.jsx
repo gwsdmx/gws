@@ -4,13 +4,13 @@ import Hero            from '@/components/landing/Hero'
 import Marquee         from '@/components/landing/Marquee'
 import Services        from '@/components/landing/Services'
 import DemoInteractiva from '@/components/landing/DemoInteractiva'
+import Projects        from '@/components/landing/Projects'
 import Process         from '@/components/landing/Process'
 import Stats           from '@/components/landing/Stats'
 import Testimonials    from '@/components/landing/Testimonials'
 import Contact         from '@/components/landing/Contact'
 import Footer          from '@/components/landing/Footer'
-import Projects        from '@/components/landing/Projects'
-import VideoSection    from '@/components/landing/VideoSection'
+// VideoSection oculto temporalmente
 
 export default function HomePage() {
   return (
@@ -21,7 +21,6 @@ export default function HomePage() {
       <Services />
       <DemoInteractiva />
       <Projects />
-      <VideoSection />
       <Process />
       <Stats />
       <Testimonials />

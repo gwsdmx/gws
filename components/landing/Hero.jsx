@@ -70,7 +70,7 @@ export default function Hero() {
               {[
                 '✅ Sistema listo y funcionando',
                 '✅ Capacitación incluida',
-                '✅ Licencia perpetua del sistema',
+                '✅ El código es 100% tuyo',
                 '✅ Soporte después de la entrega',
                 '✅ Presupuesto flexible por etapas',
                 '✅ Respuesta en menos de 24 hrs',
