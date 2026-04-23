@@ -1,10 +1,10 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 const STATS = [
-  { v:50,  pre:'+', suf:'',  l:'sistemas entregados', emoji:'🚀', detail:'a negocios reales en operación' },
-  { v:4,   pre:'',  suf:'+', l:'tipos de industria',  emoji:'🏢', detail:'retail, médico, eventos, empresas' },
-  { v:100, pre:'',  suf:'%', l:'Sistema personalizable'',       emoji:'💎', detail:'Tecnología moderna y segura' },
-  { v:24,  pre:'<', suf:'h', l:'tiempo de respuesta',  emoji:'⚡', detail:'primera consulta gratis' },
+  { v:50,  pre:'+', suf:'',  l:'sistemas entregados',    emoji:'🚀', detail:'a negocios reales en operación' },
+  { v:4,   pre:'',  suf:'+', l:'tipos de industria',     emoji:'🏢', detail:'retail, médico, eventos, empresas' },
+  { v:100, pre:'',  suf:'%', l:'Sistema personalizable', emoji:'💎', detail:'Tecnología moderna y segura' },
+  { v:24,  pre:'<', suf:'h', l:'tiempo de respuesta',    emoji:'⚡', detail:'primera consulta gratis' },
 ]
 export default function Stats() {
   const [started,setStarted]=useState(false)
